@@ -24,7 +24,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v1
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -40,7 +40,8 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-          source: "./"
+          ARGS: "-rltgoDzvO --delete"
+          source: "dist/"
           REMOTE_HOST: ${ { secrets.HOST_DNS }}
           REMOTE_USER: ${ { secrets.USERNAME }}
           TARGET: ${ { secrets.TARGET_DIR }}
